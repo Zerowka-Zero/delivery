@@ -9,12 +9,30 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: deliverydb
+      POSTGRES_DB: mydb
     healthcheck:
       test: pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
       interval: 10s
       timeout: 5s
       start_period: 10s
       retries: 5
+  mysql:
+    image: mysql:8
+    restart: "no"
+    ports:
+      - "7771:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    healthcheck:
+      test: mysqladmin ping -u root -p $$MYSQL_ROOT_PASSWORD
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 5
 volumes:
   postgres_data:
+  mysql_data:
+
