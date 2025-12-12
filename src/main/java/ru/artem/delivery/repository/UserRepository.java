@@ -1,4 +1,4 @@
-package ru.artem.delivery.repositori;
+package ru.artem.delivery.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.artem.delivery.model.User;
