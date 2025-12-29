@@ -6,3 +6,10 @@ spring:
     username: root
     password: root
     driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+
+server:
+  port: 7771
