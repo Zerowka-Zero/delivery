@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.artem.delivery.dto.CreateCatDTO;
-import ru.artem.delivery.dto.UpdateCatDTO;
-import ru.artem.delivery.dto.ViewCatDTO;
+import ru.artem.delivery.dto.cat.CreateCatDTO;
+import ru.artem.delivery.dto.cat.UpdateCatDTO;
+import ru.artem.delivery.dto.cat.ViewCatDTO;
 import ru.artem.delivery.model.Cat;
+import ru.artem.delivery.repository.CatRepository;
 import ru.artem.delivery.service.CatService;
 
 @Slf4j
@@ -21,10 +22,10 @@ public class CatController {
     @GetMapping // GET http://localhost:7771/cats?id=1
     public ViewCatDTO getCat(@RequestParam Long id) {
         Cat cat = catService.getCat(id);
-        ViewCatDTO response = new ViewCatDTO();
-        response.setName(cat.getName());
-        response.setCurrentOwner(cat.getCurrentOwner());
-        return response;
+        return ViewCatDTO.builder()
+                .name(cat.getName())
+                .currentOwner(cat.getCurrentOwner())
+                .build();
     }
 
     @PostMapping // POST http://localhost:7771/cats
@@ -44,7 +45,6 @@ public class CatController {
         catService.updateCat(cat);
     }
 
-    // Передать id в DTO
     @DeleteMapping // DELETE http://localhost:7771/cats?id=1
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCat(@RequestParam Long id) {

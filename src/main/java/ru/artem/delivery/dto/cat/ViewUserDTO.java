@@ -1,4 +1,4 @@
-package ru.artem.delivery.dto;
+package ru.artem.delivery.dto.cat;
 
 import lombok.Data;
 
