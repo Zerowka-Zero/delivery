@@ -22,5 +22,13 @@ public class CatService {
         catRepository.save(cat);
     }
 
+    @Transactional
+    public void updateCat(Cat cat) {
+        catRepository.save(cat);
+    }
 
+    @Transactional
+    public void deleteCat(Long id) {
+        catRepository.deleteById(id);
+    }
 }
